@@ -18,9 +18,7 @@ export default function ProductItem({product}) {
            <Link href={`/product/${product.slug}`}>
                 <h2 className='text-lg'>{product.name}</h2>
            </Link>
-           <p className='flex text-5xl text-amber-500 gap-1'>
-            {Array(Math.floor(product.rating)).fill('*').map((ele => <p>{ele}</p>))}
-           </p>
+          
             <p className='mb-2'>{product.brand}</p>
             <p>${product.price}</p>
             <button className="primary-button" type='button'>
