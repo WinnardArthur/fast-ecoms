@@ -8,8 +8,11 @@ import { Store } from '@/utils/Store';
 
 export default function ProductScreen() {
     const { state, dispatch } = useContext(Store);
+
     const { slug }  = useRouter().query;
     const product = data.products.find(x => x.slug === slug);
+
+    const router = useRouter();
 
     if(!product) return <div>Product Not Found</div>
 
@@ -23,6 +26,7 @@ export default function ProductScreen() {
         }
 
         dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity}})
+        router.push('/cart')
     }
 
   return (
