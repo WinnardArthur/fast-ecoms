@@ -14,6 +14,10 @@ a {
   @apply rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-400 mt-2
 }
 
+.default-button {
+  @apply rounded bg-gray-100 text-black py-2 px-4 shadow outline-none hover:bg-gray-200 mt-2
+}
+
 input,
 select,
 textarea {
