@@ -5,7 +5,9 @@ import React, { useContext } from 'react';
 import { AiOutlineCloseCircle }  from 'react-icons/ai';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function CartScreen() {
     const { state, dispatch } = useContext(Store);
@@ -18,10 +20,15 @@ function CartScreen() {
         dispatch({ type: 'CART_REMOVE_ITEM', payload: item})
     }
 
-    const updateCart = (item, qty) => {
+    const updateCart = async (item, qty) => {
         const quantity = Number(qty);
-
+        const { data } = await axios.get(`/api/products/${item._id}`)
+        if (data.countInStock < quantity) {
+            toast.error('Sorry, product is out of stock')
+            return;
+          }
         dispatch({type: 'CART_ADD_ITEM', payload: {...item, quantity}})
+        toast.success('Product updated in cart')
     }
 
   return (
