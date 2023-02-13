@@ -70,9 +70,11 @@ export default function PaymentScreen() {
                     className='default-button'
                 >Back
                 </button>
-                <button onClick={() => router.push('/order-history')} className='primary-button'>Next</button>
+                <button onClick={() => router.push('/placeorder')} className='primary-button'>Next</button>
             </div>
         </form>
     </Layout>
   )
 }
+
+PaymentScreen.auth = true;
