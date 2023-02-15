@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout'
 import { getError } from '@/utils/error';
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -36,7 +37,7 @@ export default function OrderScreen() {
                 const { data } = await axios.get(`/api/orders/${orderId}`);
                 dispatch({type: 'FETCH_SUCCESS', payload: data})
             } catch (error) {
-                dispatch({type: 'FETCH_FAIL', payload: getError(err)})
+                dispatch({type: 'FETCH_FAIL', payload: getError(error)})
             }
         }
 
