@@ -14,6 +14,14 @@ function reducer(state, action) {
             return {...state, loading: false, order: action.payload, error: ''}
         case 'FETCH_FAIL':
             return {...state, loading: false, error: action.payload}
+        case 'PAY_REQUEST':
+            return {...state, loadingPay: true }
+        case 'PAY_SUCCESS':
+            return {...state, loadingPay: false, successPay: true }
+        case 'PAY_FAIL':
+            return {...state, loadingPay: false, errorPay: action.payload }
+        case 'PAY_RESET':
+            return {...state, loadingPay: false, successPay: false, errorPay: '' }    
         default:
             state;
     }
@@ -24,11 +32,20 @@ export default function OrderScreen() {
     const { query } = router;
     const { id: orderId } = query;
 
+    let isPending = false;
+    let loadingPay = false;
+    let successPay = false;
+
     const [{loading, error, order}, dispatch,] = useReducer(reducer, {
         loading: true,
         order: {},
-        error: ''
+        error: '',
+        successPay: '', 
+        loadingPay: false,
+        errorPay: ''
     })
+
+    // api/orders/${order._id}/pay
 
     useEffect(() => {
         const fetchOrder = async () => {
@@ -44,7 +61,7 @@ export default function OrderScreen() {
         if(!order._id || (order._id && order._id !== orderId)) {
             fetchOrder();
         }
-    }, [orderId, order])
+    }, [orderId, order, successPay])
 
     const {
         shippingAddress,
@@ -158,6 +175,20 @@ export default function OrderScreen() {
                                     <div>${totalPrice}</div>
                                 </div>
                             </li>
+                            {!isPaid && 
+                                <li>
+                                    {
+                                        isPending ? 
+                                        <div>Loading...</div> 
+                                        : 
+                                        <div className='w-full'>
+                                            <button>Pay Now</button>
+                                        </div>
+                                        
+                                    }
+                                    {loadingPay && <div>Loading...</div>}
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
