@@ -23,7 +23,7 @@ export default function ProfileScreen() {
         setValue('email', session.user.email)
     }, [session.user, setValue]);
 
-    const submitHandler = async ({ name, email, password, confirmPassword }) => {
+    const submitHandler = async ({ name, email, password }) => {
         try {
             await axios.put(`/api/auth/update`, { 
                 name, email, password 

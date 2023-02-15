@@ -10,7 +10,6 @@ import { toast } from 'react-toastify';
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
-  const { cart } = state;
 
   const addToCart = async (product) => {
     const existItem = state.cart.cartItems.find(x => x.slug === product.slug);

@@ -37,7 +37,7 @@ export default function LoginScreen() {
                 toast.error(result.error);
             }
         } catch (error) {
-             toast.error(getError(err))
+             toast.error(getError(error))
         }
     }
 
@@ -78,7 +78,7 @@ export default function LoginScreen() {
                     <button className='primary-button'>Login</button>
                 </div>
                 <div className='mb-4'>
-                    Don't have an account? <Link href={`/register?redirect=${redirect || '/'}`}>Register</Link>
+                    Don&apos;t have an account? <Link href={`/register?redirect=${redirect || "/"}`}>Register</Link>
                 </div>
             </form>
         </Layout>

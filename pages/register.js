@@ -43,7 +43,7 @@ export default function RegisterScreen() {
                 toast.error(result.error);
             }
         } catch (error) {
-             toast.error(getError(err))
+             toast.error(getError(error))
         }
     }
 
